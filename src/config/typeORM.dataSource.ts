@@ -11,7 +11,7 @@ export const typeORMDataSourceConfig: DataSourceOptions = {
   port: Number(process.env.DB_PORT) || 5432,
   host: process.env.DB_HOST || 'localhost',
   entities: ['dist/**/*.entity.js'],
-  migrations: ['dist/src/db/migrations/*.js'],
+  migrations: ['dist/db/migrations/*.js'],
   synchronize: false,
 };
 
