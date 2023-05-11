@@ -1,4 +1,5 @@
-import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
+import { encryptPassword } from 'src/utilities/helper';
+import { PrimaryGeneratedColumn, Column, Entity, BeforeInsert } from 'typeorm';
 
 @Entity()
 export class User {
@@ -20,4 +21,12 @@ export class User {
 
   @Column()
   Password: string;
+
+  // Hook which will be called before the insert.
+  @BeforeInsert()
+  async encryptPassword() {
+    // Encrypted the user entered password.
+    console.log('Encrypting the user password...');
+    this.Password = await encryptPassword(this.Password);
+  }
 }
