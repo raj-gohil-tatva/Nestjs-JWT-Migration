@@ -19,7 +19,7 @@ export class User {
   @Column()
   LastName: string;
 
-  @Column()
+  @Column({ select: false })
   Password: string;
 
   // Hook which will be called before the insert.

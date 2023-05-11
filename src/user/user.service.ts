@@ -34,6 +34,9 @@ export class UserService {
     // Create the user.
     const userData = this.userRepository.create(body);
     // Save the user to the database.
-    return this.userRepository.save(userData);
+    const createdUser = await this.userRepository.save(userData);
+    // Delete the password property.
+    delete createdUser.Password;
+    return createdUser;
   }
 }
