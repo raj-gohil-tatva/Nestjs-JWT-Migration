@@ -29,7 +29,7 @@
 
 ## Additional Scripts for migration
 
-- To automatically generate a migration based on the entity changes: `npm run migration:generate -- db/migrations/file_name_to_be_generated`
+- To automatically generate a migration based on the entity changes: `npm run migration:generate -- src/db/migrations/file_name_to_be_generated`
 
 - To run the migration: `npm run migration:run`
 
