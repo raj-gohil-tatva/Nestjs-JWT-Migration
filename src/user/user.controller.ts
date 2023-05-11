@@ -1,6 +1,6 @@
 import { Body, Get, Param, Post } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
-import { RegisterUserDTO } from './DTO/user.dto';
+import { LoginUserDTO, RegisterUserDTO } from './DTO/user.dto';
 import { UserService } from './user.service';
 
 @Controller()
@@ -11,6 +11,12 @@ export class UserController {
   @Post('/register')
   register(@Body() body: RegisterUserDTO) {
     return this.userService.register(body);
+  }
+
+  // Login the user to the System.
+  @Post('login')
+  login(@Body() loginData: LoginUserDTO) {
+    return this.userService.login(loginData.Email, loginData.Password);
   }
 
   // Find the user given by the ID.

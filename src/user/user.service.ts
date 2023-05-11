@@ -8,6 +8,7 @@ import { Repository } from 'typeorm';
 import { User } from 'src/db/entities/user.entity';
 import { RegisterUserDTO } from './DTO/user.dto';
 import { MessageConstant } from 'src/utilities/constant';
+import { compareHashedPassword } from 'src/utilities/helper';
 
 @Injectable()
 export class UserService {
@@ -42,6 +43,32 @@ export class UserService {
     // Delete the password property.
     delete createdUser.Password;
     return createdUser;
+  }
+
+  async login(email: string, password: string): Promise<User> {
+    // Make the email lowercase.
+    email = email.toLowerCase();
+    // Find the user by email id.
+    const user = await this.userRepository.findOne({
+      where: {
+        Email: email,
+      },
+      select: ['ID', 'Email', 'Password', 'FirstName', 'LastName'],
+    });
+    // Throw error if no matching record found for the email.
+    if (!user) {
+      throw new NotFoundException(MessageConstant.UserDoesNotExist);
+    }
+    const isPasswordMatch = await compareHashedPassword(
+      password,
+      user.Password,
+    );
+    if (!isPasswordMatch) {
+      throw new NotFoundException(MessageConstant.InvalidPassword);
+    }
+    // Delete the password property.
+    delete user.Password;
+    return user;
   }
 
   async findUserById(id: number): Promise<User> {

@@ -13,3 +13,11 @@ export class RegisterUserDTO {
   @IsString()
   LastName: string;
 }
+
+export class LoginUserDTO {
+  @IsEmail()
+  Email: string;
+
+  @IsString()
+  Password: string;
+}
