@@ -29,8 +29,6 @@
 
 ## Additional Scripts for migration
 
-- To load the TypeORM data source: `npm run typeorm`
-
 - To automatically generate a migration based on the entity changes: `npm run migration:generate -- db/migrations/file_name_to_be_generated`
 
 - To run the migration: `npm run migration:run`
@@ -39,6 +37,7 @@
 
 ## Useful Links
 
-- JWT: https://docs.nestjs.com/security/authentication
+- JWT with Nest.js: https://docs.nestjs.com/security/authentication
 - TypeORM: https://typeorm.io/
+- JWT: https://jwt.io/
 - Bcrypt: https://www.npmjs.com/package/bcrypt
