@@ -10,57 +10,35 @@
 
 - `v18.16.0`
 
-## Installation
+## Getting Started
 
-```bash
-$ npm install
-```
+1. Clone the repo: `git clone https://github.com/raj-gohil-tatva/nestjs-jwt-migration`
+2. Install dependencies: `npm install`
 
-## Running the app
+## Running the App
 
-```bash
-# development
-$ npm run start
+- Development mode: `npm run start`
+- Watch mode: `npm run start:dev`
+- Production mode: `npm run start:prod`
 
-# watch mode
-$ npm run start:dev
+## Testing
 
-# production mode
-$ npm run start:prod
-```
+- Unit tests: `npm run test`
+- End-to-end tests: `npm run test:e2e`
+- Test coverage: `npm run test:cov`
 
-## Test
+## Additional Scripts for migration
 
-```bash
-# unit tests
-$ npm run test
+- To load the TypeORM data source: `npm run typeorm`
 
-# e2e tests
-$ npm run test:e2e
+- To automatically generate a migration based on the entity changes: `npm run migration:generate -- db/migrations/file_name_to_be_generated`
 
-# test coverage
-$ npm run test:cov
-```
+- To run the migration: `npm run migration:run`
 
-## Additional Scripts
-
-```bash
-# To load the TypeORM data source.
-"typeorm": "npm run build && npx typeorm -d dist/config/typeORMdataSource.js"
-
-# To automatically generated the migration based on the entity changes.
-"migration:generate": "npm run typeorm -- migration:generate"
-Usage Example: npm run migration:generate -- db/migrations/add-user-table
-
-# To run the migration.
-"migration:run": "npm run typeorm -- migration:run"
-
-# TO undo or revert the most recent migration.
-"migration:revert": "npm run typeorm -- migration:revert"
-```
+- To revert the most recent migration: `npm run migration:revert`
 
 ## Useful Links
 
 - JWT: https://docs.nestjs.com/security/authentication
 - TypeORM: https://typeorm.io/
-- Bcrypt: https://www.npmjs.com/package/bcryp
+- Bcrypt: https://www.npmjs.com/package/bcrypt
