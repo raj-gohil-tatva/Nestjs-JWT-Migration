@@ -44,13 +44,20 @@ $ npm run test:cov
 
 ## Additional Scripts
 
-- `"typeorm": "npm run build && npx typeorm -d dist/config/typeORMdataSource.js"`
+```bash
+# To load the TypeORM data source.
+"typeorm": "npm run build && npx typeorm -d dist/config/typeORMdataSource.js"
 
-- `  "migration:generate": "npm run typeorm -- migration:generate"`
-  <br><b>Usage example:</b> `npm run migration:generate -- db/migrations/add-user-table`
+# To automatically generated the migration based on the entity changes.
+"migration:generate": "npm run typeorm -- migration:generate"
+Usage Example: npm run migration:generate -- db/migrations/add-user-table
 
-- ` "migration:run": "npm run typeorm -- migration:run"`
-- `"migration:revert": "npm run typeorm -- migration:revert"`
+# To run the migration.
+"migration:run": "npm run typeorm -- migration:run"
+
+# TO undo or revert the most recent migration.
+"migration:revert": "npm run typeorm -- migration:revert"
+```
 
 ## Useful Links
 
