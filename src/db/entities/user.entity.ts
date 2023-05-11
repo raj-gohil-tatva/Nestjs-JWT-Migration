@@ -26,7 +26,7 @@ export class User {
   @BeforeInsert()
   async encryptPassword() {
     // Encrypted the user entered password.
-    console.log('Encrypting the user password...');
+    console.info('Encrypting the user password...');
     this.Password = await encryptPassword(this.Password);
   }
 }
