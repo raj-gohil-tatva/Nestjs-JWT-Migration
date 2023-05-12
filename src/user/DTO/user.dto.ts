@@ -21,3 +21,11 @@ export class LoginUserDTO {
   @IsString()
   Password: string;
 }
+
+export class EditUserDTO {
+  @IsString()
+  FirstName: string;
+
+  @IsString()
+  LastName: string;
+}
