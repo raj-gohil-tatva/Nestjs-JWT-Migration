@@ -1,21 +1,21 @@
+import { Repository } from 'typeorm';
+import * as jwt from 'jsonwebtoken';
 import {
   Injectable,
   BadRequestException,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { User } from 'src/db/entities/user.entity';
 import { RegisterUserDTO } from './DTO/user.dto';
 import { MessageConstant } from 'src/utilities/constant';
 import { compareHashedPassword } from 'src/utilities/helper';
-import { JwtService } from '@nestjs/jwt';
+import { JWTConfig } from 'src/config/JWT.config';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
-    private readonly jwtService: JwtService,
   ) {}
 
   async register(body: RegisterUserDTO): Promise<User> {
@@ -72,7 +72,9 @@ export class UserService {
     delete user.Password;
     // Sign the data to JWT and return the token.
     // Note: here the sign method of jwt requires an plain object so we have to just destruct the user object.
-    const jwtToken = await this.jwtService.signAsync({ ...user });
+    const jwtToken = jwt.sign({ ...user }, JWTConfig.JWTSecretKey, {
+      expiresIn: JWTConfig.TimeExpiry,
+    });
     Object.assign(user, {
       Token: jwtToken,
     });

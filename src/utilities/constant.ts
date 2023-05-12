@@ -7,4 +7,4 @@ export const MessageConstant = {
     'Please login into the system to start using the service.',
 };
 
-export const JWT_Header = 'JWT_Authorization_Token';
+export const JWT_Header = 'jwt_authorization_token';

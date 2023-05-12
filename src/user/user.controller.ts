@@ -1,7 +1,8 @@
-import { Body, Get, Param, Post } from '@nestjs/common';
+import { Body, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { LoginUserDTO, RegisterUserDTO } from './DTO/user.dto';
 import { UserService } from './user.service';
+import { JWTGuard } from 'src/guards/JWT.guard';
 
 @Controller()
 export class UserController {
@@ -20,6 +21,7 @@ export class UserController {
   }
 
   // Find the user given by the ID.
+  @UseGuards(JWTGuard)
   @Get(':id')
   findById(@Param('id') id: number) {
     return this.userService.findUserById(id);

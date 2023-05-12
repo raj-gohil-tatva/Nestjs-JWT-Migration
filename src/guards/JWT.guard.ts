@@ -3,12 +3,11 @@ import {
   ExecutionContext,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import * as jwt from 'jsonwebtoken';
+import { JWTConfig } from 'src/config/JWT.config';
 import { JWT_Header, MessageConstant } from 'src/utilities/constant';
 
 export class JWTGuard implements CanActivate {
-  constructor(private readonly jwtService: JwtService) {}
-
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest() as Request;
     // Get the JWT token from the request header.
@@ -17,7 +16,7 @@ export class JWTGuard implements CanActivate {
       throw new UnauthorizedException(MessageConstant.PleaseLoginToSystem);
     }
     try {
-      const tokenData = await this.jwtService.verifyAsync(JWTHeaderToken);
+      const tokenData = jwt.verify(JWTHeaderToken, JWTConfig.JWTSecretKey);
       Object.assign(req, {
         user: tokenData,
       });
